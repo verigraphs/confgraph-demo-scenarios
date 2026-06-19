@@ -1,0 +1,166 @@
+hostname dc-spine-02
+feature bgp
+feature bfd
+interface loopback0
+  ip address 10.255.0.2/32
+interface Ethernet1/1
+  description to-dc-leaf-01
+  no switchport
+  mtu 9216
+  ip address 10.0.0.5/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/2
+  description to-dc-leaf-02
+  no switchport
+  mtu 9216
+  ip address 10.0.0.13/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/3
+  description to-dc-leaf-03
+  no switchport
+  mtu 9216
+  ip address 10.0.0.21/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/4
+  description to-dc-leaf-04
+  no switchport
+  mtu 9216
+  ip address 10.0.0.29/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/5
+  description to-dc-leaf-05
+  no switchport
+  mtu 9216
+  ip address 10.0.0.37/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/6
+  description to-dc-leaf-06
+  no switchport
+  mtu 9216
+  ip address 10.0.0.45/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/7
+  description to-dc-leaf-07
+  no switchport
+  mtu 9216
+  ip address 10.0.0.53/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/8
+  description to-dc-leaf-08
+  no switchport
+  mtu 9216
+  ip address 10.0.0.61/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/9
+  description to-dc-leaf-09
+  no switchport
+  mtu 9216
+  ip address 10.0.0.69/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/10
+  description to-dc-leaf-10
+  no switchport
+  mtu 9216
+  ip address 10.0.0.77/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/11
+  description to-dc-bleaf-01
+  no switchport
+  mtu 9216
+  ip address 10.0.0.85/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/12
+  description to-dc-bleaf-02
+  no switchport
+  mtu 9216
+  ip address 10.0.0.93/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/13
+  description to-dc-sleaf-01
+  no switchport
+  mtu 9216
+  ip address 10.0.0.101/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/14
+  description to-dc-sleaf-02
+  no switchport
+  mtu 9216
+  ip address 10.0.0.109/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+ip prefix-list RFC1918 seq 5 permit 10.0.0.0/8 le 32
+ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+ip community-list standard CORP permit 65000:100
+route-map FROM-PEER permit 10
+ match ip address prefix-list RFC1918
+ set community 65000:100
+route-map TO-PEER permit 10
+ match ip address prefix-list RFC1918
+router bgp 65100
+  router-id 10.255.0.2
+  address-family ipv4 unicast
+  neighbor 10.0.0.6 remote-as 65001
+    description peer-AS65001
+    address-family ipv4 unicast
+  neighbor 10.0.0.14 remote-as 65002
+    description peer-AS65002
+    address-family ipv4 unicast
+  neighbor 10.0.0.22 remote-as 65003
+    description peer-AS65003
+    address-family ipv4 unicast
+  neighbor 10.0.0.30 remote-as 65004
+    description peer-AS65004
+    address-family ipv4 unicast
+  neighbor 10.0.0.38 remote-as 65005
+    description peer-AS65005
+    address-family ipv4 unicast
+  neighbor 10.0.0.46 remote-as 65006
+    description peer-AS65006
+    address-family ipv4 unicast
+  neighbor 10.0.0.54 remote-as 65007
+    description peer-AS65007
+    address-family ipv4 unicast
+  neighbor 10.0.0.62 remote-as 65008
+    description peer-AS65008
+    address-family ipv4 unicast
+  neighbor 10.0.0.70 remote-as 65009
+    description peer-AS65009
+    address-family ipv4 unicast
+  neighbor 10.0.0.78 remote-as 65010
+    description peer-AS65010
+    address-family ipv4 unicast
+  neighbor 10.0.0.86 remote-as 65011
+    description peer-AS65011
+    address-family ipv4 unicast
+  neighbor 10.0.0.94 remote-as 65012
+    description peer-AS65012
+    address-family ipv4 unicast
+  neighbor 10.0.0.102 remote-as 65021
+    description peer-AS65021
+    address-family ipv4 unicast
+  neighbor 10.0.0.110 remote-as 65022
+    description peer-AS65022
+    address-family ipv4 unicast
+feature tacacs+
+ip domain-name corp.megacorp.net
+ip name-server 10.0.250.5
+aaa group server tacacs+ TAC-GRP
+  server 10.0.250.10
+aaa authentication login default group TAC-GRP
+logging server 10.0.250.20 5
+ntp server 10.255.255.1
+snmp-server community megacorp group network-operator
+banner motd #MegaCorp spine dc-spine-02 - authorized access only#

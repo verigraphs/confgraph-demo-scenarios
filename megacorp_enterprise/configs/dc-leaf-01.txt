@@ -1,0 +1,79 @@
+hostname dc-leaf-01
+feature bgp
+feature bfd
+feature interface-vlan
+feature dhcp
+spanning-tree mode rapid-pvst
+interface loopback0
+  ip address 10.255.1.1/32
+vlan 101
+  name SERVERS_01
+spanning-tree vlan 101 priority 4096
+interface Vlan101
+  no shutdown
+  ip address 10.10.1.1/24
+  ip dhcp relay address 10.0.250.30
+interface Ethernet1/1
+  description to-dc-spine-01
+  no switchport
+  mtu 9216
+  ip address 10.0.0.2/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/2
+  description to-dc-spine-02
+  no switchport
+  mtu 9216
+  ip address 10.0.0.6/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+ip prefix-list RFC1918 seq 5 permit 10.0.0.0/8 le 32
+ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+ip community-list standard CORP permit 65000:100
+route-map FROM-PEER permit 10
+ match ip address prefix-list RFC1918
+ set community 65000:100
+route-map TO-PEER permit 10
+ match ip address prefix-list RFC1918
+router bgp 65001
+  router-id 10.255.1.1
+  address-family ipv4 unicast
+    network 10.10.1.0/24
+  neighbor 10.0.0.1 remote-as 65100
+    description peer-AS65100
+    address-family ipv4 unicast
+  neighbor 10.0.0.5 remote-as 65100
+    description peer-AS65100
+    address-family ipv4 unicast
+feature nv overlay
+feature vn-segment-vlan-based
+feature vpc
+feature lacp
+interface loopback1
+  ip address 10.255.101.1/32
+vlan 10
+  vn-segment 10010
+vpc domain 10
+  role priority 100
+  peer-keepalive destination 10.255.1.2 source 10.255.1.1 vrf management
+  delay restore 150
+  auto-recovery
+interface port-channel10
+  vpc peer-link
+interface nve1
+  no shutdown
+  source-interface loopback1
+  host-reachability protocol bgp
+  member vni 10010
+  member vni 10020
+  member vni 50001 associate-vrf
+feature tacacs+
+ip domain-name corp.megacorp.net
+ip name-server 10.0.250.5
+aaa group server tacacs+ TAC-GRP
+  server 10.0.250.10
+aaa authentication login default group TAC-GRP
+logging server 10.0.250.20 5
+ntp server 10.255.255.1
+snmp-server community megacorp group network-operator
+banner motd #MegaCorp leaf dc-leaf-01 - authorized access only#

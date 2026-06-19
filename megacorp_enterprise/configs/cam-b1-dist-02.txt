@@ -1,0 +1,83 @@
+hostname cam-b1-dist-02
+interface Loopback0
+ ip address 10.255.9.2 255.255.255.255
+spanning-tree mode rapid-pvst
+vrf definition GUEST
+ rd 65400:1
+ address-family ipv4
+  route-target export 65400:10
+  route-target import 65400:10
+spanning-tree vlan 100 priority 8192
+vlan 100
+ name USERS
+vlan 200
+ name GUEST
+interface Vlan100
+ ip address 10.40.1.2 255.255.255.0
+ ip ospf 1 area 0
+ ip helper-address 10.0.250.30
+ standby version 2
+ standby 1 ip 10.40.1.254
+ standby 1 priority 100
+ standby 1 preempt
+ standby 1 authentication md5 key-string CORPFHRP
+ no shutdown
+interface Vlan200
+ vrf forwarding GUEST
+ ip address 10.45.1.2 255.255.255.0
+ no shutdown
+interface GigabitEthernet1
+ description to-cam-core-01
+ ip address 10.0.0.206 255.255.255.252
+ bfd interval 300 min_rx 300 multiplier 3
+ no shutdown
+ ip ospf 1 area 0
+ ip ospf bfd
+interface GigabitEthernet2
+ description to-cam-core-02
+ ip address 10.0.0.210 255.255.255.252
+ bfd interval 300 min_rx 300 multiplier 3
+ no shutdown
+ ip ospf 1 area 0
+ ip ospf bfd
+interface GigabitEthernet3
+ description to-cam-b1-acc-01
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 99
+interface GigabitEthernet4
+ description to-cam-b1-acc-02
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 99
+interface GigabitEthernet5
+ description to-cam-b1-acc-03
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 99
+interface GigabitEthernet6
+ description to-cam-b1-acc-04
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 99
+router ospf 1
+ router-id 10.255.9.2
+aaa new-model
+tacacs server TAC1
+ address ipv4 10.0.250.10
+aaa group server tacacs+ TAC-GRP
+ server name TAC1
+aaa authentication login default group TAC-GRP local
+aaa authorization exec default group TAC-GRP local
+ip domain-name corp.megacorp.net
+ip name-server 10.0.250.5
+logging host 10.0.250.20
+ip access-list standard MGMT-IN
+ permit 10.0.250.0 0.0.0.255
+ntp server 10.255.255.1
+snmp-server community megacorp RO
+banner login ^MegaCorp campus-dist cam-b1-dist-02 - authorized access only^
+line vty 0 4
+ access-class MGMT-IN in
+ login authentication default
+ transport input ssh

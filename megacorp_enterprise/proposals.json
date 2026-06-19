@@ -1,0 +1,80 @@
+{
+  "cam-b1-dist-01": {
+    "narrative": "Re-area a campus uplink and re-group the HSRP gateway in one change — two independent stories: a routing (OSPF) impact and a first-hop-redundancy (HSRP) impact.",
+    "snippet": "interface GigabitEthernet1\n ip ospf 1 area 1\ninterface Vlan100\n no standby 1 ip 10.40.1.254\n standby 2 ip 10.40.1.254"
+  },
+  "cam-core-01": {
+    "narrative": "Move a core↔distribution link into a new OSPF area and drain a service-core BGP uplink at once — an OSPF story and a BGP story in a single change.",
+    "snippet": "interface GigabitEthernet3\n ip ospf 1 area 2\nrouter bgp 65400\n neighbor 10.0.0.169 shutdown"
+  },
+  "dc-spine-02": {
+    "narrative": "Fat-finger the eBGP peer AS on a fabric uplink — the OPEN is rejected (bad peer AS) and the leaf session never establishes.",
+    "snippet": "router bgp 65100\n neighbor 10.0.0.6 remote-as 65002"
+  },
+  "branch-rtr-01": {
+    "narrative": "Prepend the AS-path on the branch's advertised LAN (a routine traffic-steering edit). Two ASes away, across the WAN transit, a campus-core inbound filter keys on the over-prepended path and drops 10.50.1.0/24 outright — so the campus loses reachability to the branch LAN. A policy change at the source cascades into a router whose own config never changed; you cannot read cam-core in isolation.",
+    "snippet": "route-map TO-PEER permit 10\n match ip address prefix-list RFC1918\n set as-path prepend 65501 65501"
+  },
+  "dc-bleaf-01": {
+    "narrative": "Fat-finger the peer-AS on both of the border-leaf's uplinks to the Internet edge — the eBGP sessions never re-establish, and the external prefixes the edge injects are blackholed across the data center (traffic to them is silently dropped).",
+    "snippet": "router bgp 65011\n neighbor 10.0.0.114 remote-as 65299\n neighbor 10.0.0.118 remote-as 65299"
+  },
+
+  "branch-rtr-02": {
+    "narrative": "Re-range the local MPLS label space on the branch WAN router — local label bindings are re-allocated and downstream LSP label mappings update; LDP router-id reachability is also flagged.",
+    "snippet": "mpls ldp router-id Loopback0 force\nmpls label range 100 199\nmpls ldp graceful-restart\nmpls ldp session protection"
+  },
+  "dc-leaf-01": {
+    "narrative": "Move the VXLAN VTEP onto a different source loopback — every VXLAN tunnel re-establishes with the new source IP; overlay segments flap during the transition.",
+    "snippet": "interface nve1\n  source-interface loopback9\n  member vni 10010\n  member vni 10020\n  member vni 50001 associate-vrf"
+  },
+  "dc-leaf-02": {
+    "narrative": "Drop the vPC peer-keepalive on a leaf — the keepalive heartbeat is lost and, if the peer-link also fails, both switches assume primary role (split-brain).",
+    "snippet": "vpc domain 10\n  role priority 200\n  delay restore 150\n  auto-recovery\ninterface port-channel10\n  vpc peer-link"
+  },
+  "cam-core-02": {
+    "narrative": "Add a PIM RP that exists on no interface and is not IGP-reachable — groups mapped to it fail to build their shared tree and multicast forwarding stops.",
+    "snippet": "ip multicast-routing\nip pim rp-address 10.255.8.1\nip pim rp-address 192.0.2.99"
+  },
+
+  "dc-fw-01": {
+    "narrative": "Remove aaa new-model on the firewall — the entire AAA framework is disabled and management auth falls back to line passwords or none (lockout / open-access risk).",
+    "snippet": "no aaa new-model"
+  },
+  "wan-core-01": {
+    "narrative": "Remove the only NTP server on a WAN core router — the device loses time sync; clock drift breaks logging correlation, certificate validation, and time-based ACLs.",
+    "snippet": "no ntp server 10.255.255.1"
+  },
+  "wan-core-02": {
+    "narrative": "Remove the SNMP community on a WAN core router — NMS polling and trap delivery stop; the device goes dark to monitoring.",
+    "snippet": "no snmp-server community megacorp RO"
+  },
+  "svc-core-01": {
+    "narrative": "Remove the syslog destination on a service-core router — security and operational events are no longer exported off-box.",
+    "snippet": "no logging 10.0.250.20"
+  },
+  "svc-core-02": {
+    "narrative": "Reword the login banner on a service-core router — a benign cosmetic change; the tool correctly rates it informational, not service-affecting.",
+    "snippet": "banner motd #UNAUTHORIZED ACCESS ONLY#"
+  },
+  "cam-b1-acc-04": {
+    "narrative": "Remove the DNS name-server on a campus access switch — on-box name resolution fails; impact is contained to the management plane.",
+    "snippet": "no ip name-server 10.0.250.5"
+  },
+  "cam-b1-acc-02": {
+    "narrative": "Add telnet to the VTY transport on a campus access switch — a security regression that exposes cleartext management access.",
+    "snippet": "line vty 0 4\n transport input telnet ssh"
+  },
+  "cam-b1-acc-01": {
+    "narrative": "Change the spanning-tree mode (rapid-pvst → mst) on an access switch — a fabric-wide STP recompute; mismatched modes with neighbors risk loops or blocked ports.",
+    "snippet": "spanning-tree mode mst"
+  },
+  "cam-b2-dist-01": {
+    "narrative": "Remove the DHCP relay (helper-address) on a distribution SVI — hosts on that VLAN can no longer reach the DHCP server and fail to obtain addresses.",
+    "snippet": "interface Vlan100\n no ip helper-address 10.0.250.30"
+  },
+  "dc-leaf-03": {
+    "narrative": "Remove BFD from a leaf↔spine uplink — failure detection falls back to slow protocol timers; convergence on a link fault is seconds instead of milliseconds.",
+    "snippet": "interface Ethernet1/1\n  no bfd interval 250 min_rx 250 multiplier 3"
+  }
+}

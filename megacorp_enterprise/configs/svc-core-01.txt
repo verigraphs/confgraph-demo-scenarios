@@ -1,0 +1,73 @@
+hostname svc-core-01
+interface Loopback0
+ ipv4 address 10.255.6.1 255.255.255.255
+interface GigabitEthernet0/0/0/0
+ description to-svc-core-02
+ ipv4 address 10.0.0.157 255.255.255.252
+interface GigabitEthernet0/0/0/1
+ description to-wan-core-01
+ ipv4 address 10.0.0.162 255.255.255.252
+interface GigabitEthernet0/0/0/2
+ description to-cam-core-01
+ ipv4 address 10.0.0.169 255.255.255.252
+interface GigabitEthernet0/0/0/3
+ description to-cam-core-02
+ ipv4 address 10.0.0.173 255.255.255.252
+prefix-set RFC1918
+  10.0.0.0/8 le 32
+end-set
+route-policy PASS
+  pass
+end-policy
+route-policy FROM-PEER
+  if destination in RFC1918 then
+    pass
+  endif
+end-policy
+router bgp 65300
+ bgp router-id 10.255.6.1
+ address-family ipv4 unicast
+ !
+ neighbor 10.0.0.158
+  remote-as 65300
+  description peer-AS65300
+  bfd fast-detect
+  address-family ipv4 unicast
+   route-policy FROM-PEER in
+   route-policy PASS out
+  !
+ neighbor 10.0.0.161
+  remote-as 65300
+  description peer-AS65300
+  bfd fast-detect
+  address-family ipv4 unicast
+   route-policy FROM-PEER in
+   route-policy PASS out
+  !
+ neighbor 10.0.0.170
+  remote-as 65400
+  description peer-AS65400
+  bfd fast-detect
+  address-family ipv4 unicast
+   route-policy FROM-PEER in
+   route-policy PASS out
+  !
+ neighbor 10.0.0.174
+  remote-as 65400
+  description peer-AS65400
+  bfd fast-detect
+  address-family ipv4 unicast
+   route-policy FROM-PEER in
+   route-policy PASS out
+  !
+domain name corp.megacorp.net
+domain name-server 10.0.250.5
+tacacs-server host 10.0.250.10
+aaa group server tacacs+ TAC-GRP
+ server-private 10.0.250.10 port 49
+aaa authentication login default group TAC-GRP local
+logging 10.0.250.20
+ssh server v2
+ntp server 10.255.255.1
+snmp-server community megacorp RO
+banner motd #MegaCorp svc-core svc-core-01 - authorized access only#

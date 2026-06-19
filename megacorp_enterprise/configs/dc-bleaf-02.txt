@@ -1,0 +1,66 @@
+hostname dc-bleaf-02
+feature bgp
+feature bfd
+interface loopback0
+  ip address 10.255.2.2/32
+interface Ethernet1/1
+  description to-dc-spine-01
+  no switchport
+  mtu 9216
+  ip address 10.0.0.90/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/2
+  description to-dc-spine-02
+  no switchport
+  mtu 9216
+  ip address 10.0.0.94/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/3
+  description to-dc-edge-01
+  no switchport
+  mtu 9216
+  ip address 10.0.0.121/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+interface Ethernet1/4
+  description to-dc-edge-02
+  no switchport
+  mtu 9216
+  ip address 10.0.0.125/30
+  bfd interval 250 min_rx 250 multiplier 3
+  no shutdown
+ip prefix-list RFC1918 seq 5 permit 10.0.0.0/8 le 32
+ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+ip community-list standard CORP permit 65000:100
+route-map FROM-PEER permit 10
+ match ip address prefix-list RFC1918
+ set community 65000:100
+route-map TO-PEER permit 10
+ match ip address prefix-list RFC1918
+router bgp 65012
+  router-id 10.255.2.2
+  address-family ipv4 unicast
+  neighbor 10.0.0.89 remote-as 65100
+    description peer-AS65100
+    address-family ipv4 unicast
+  neighbor 10.0.0.93 remote-as 65100
+    description peer-AS65100
+    address-family ipv4 unicast
+  neighbor 10.0.0.122 remote-as 65200
+    description peer-AS65200
+    address-family ipv4 unicast
+  neighbor 10.0.0.126 remote-as 65200
+    description peer-AS65200
+    address-family ipv4 unicast
+feature tacacs+
+ip domain-name corp.megacorp.net
+ip name-server 10.0.250.5
+aaa group server tacacs+ TAC-GRP
+  server 10.0.250.10
+aaa authentication login default group TAC-GRP
+logging server 10.0.250.20 5
+ntp server 10.255.255.1
+snmp-server community megacorp group network-operator
+banner motd #MegaCorp border-leaf dc-bleaf-02 - authorized access only#

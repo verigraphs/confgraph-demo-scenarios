@@ -1,0 +1,5 @@
+{
+  "id": "megacorp_enterprise",
+  "title": "MegaCorp — Enterprise DC + Campus Fabric",
+  "hook": "A 46-device enterprise: NX-OS spine-leaf data-center fabric, IOS-XR WAN/edge backbone, and an IOS-XE campus across three buildings. Explore the topology, then play out changes across every layer."
+}

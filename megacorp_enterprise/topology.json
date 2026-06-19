@@ -1,0 +1,684 @@
+{
+  "links": [
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/1",
+      "device_b": "dc-leaf-01",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/1",
+      "device_b": "dc-leaf-01",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/2",
+      "device_b": "dc-leaf-02",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/2",
+      "device_b": "dc-leaf-02",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/3",
+      "device_b": "dc-leaf-03",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/3",
+      "device_b": "dc-leaf-03",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/4",
+      "device_b": "dc-leaf-04",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/4",
+      "device_b": "dc-leaf-04",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/5",
+      "device_b": "dc-leaf-05",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/5",
+      "device_b": "dc-leaf-05",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/6",
+      "device_b": "dc-leaf-06",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/6",
+      "device_b": "dc-leaf-06",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/7",
+      "device_b": "dc-leaf-07",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/7",
+      "device_b": "dc-leaf-07",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/8",
+      "device_b": "dc-leaf-08",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/8",
+      "device_b": "dc-leaf-08",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/9",
+      "device_b": "dc-leaf-09",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/9",
+      "device_b": "dc-leaf-09",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/10",
+      "device_b": "dc-leaf-10",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/10",
+      "device_b": "dc-leaf-10",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/11",
+      "device_b": "dc-bleaf-01",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/11",
+      "device_b": "dc-bleaf-01",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/12",
+      "device_b": "dc-bleaf-02",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/12",
+      "device_b": "dc-bleaf-02",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/13",
+      "device_b": "dc-sleaf-01",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/13",
+      "device_b": "dc-sleaf-01",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-01",
+      "port_a": "Ethernet1/14",
+      "device_b": "dc-sleaf-02",
+      "port_b": "Ethernet1/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-spine-02",
+      "port_a": "Ethernet1/14",
+      "device_b": "dc-sleaf-02",
+      "port_b": "Ethernet1/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-bleaf-01",
+      "port_a": "Ethernet1/3",
+      "device_b": "dc-edge-01",
+      "port_b": "GigabitEthernet0/0/0/0",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-bleaf-01",
+      "port_a": "Ethernet1/4",
+      "device_b": "dc-edge-02",
+      "port_b": "GigabitEthernet0/0/0/0",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-bleaf-02",
+      "port_a": "Ethernet1/3",
+      "device_b": "dc-edge-01",
+      "port_b": "GigabitEthernet0/0/0/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-bleaf-02",
+      "port_a": "Ethernet1/4",
+      "device_b": "dc-edge-02",
+      "port_b": "GigabitEthernet0/0/0/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-sleaf-01",
+      "port_a": "Ethernet1/3",
+      "device_b": "dc-fw-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-sleaf-02",
+      "port_a": "Ethernet1/3",
+      "device_b": "dc-fw-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-edge-01",
+      "port_a": "GigabitEthernet0/0/0/2",
+      "device_b": "wan-core-01",
+      "port_b": "GigabitEthernet0/0/0/0",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-edge-01",
+      "port_a": "GigabitEthernet0/0/0/3",
+      "device_b": "wan-core-02",
+      "port_b": "GigabitEthernet0/0/0/0",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-edge-02",
+      "port_a": "GigabitEthernet0/0/0/2",
+      "device_b": "wan-core-01",
+      "port_b": "GigabitEthernet0/0/0/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "dc-edge-02",
+      "port_a": "GigabitEthernet0/0/0/3",
+      "device_b": "wan-core-02",
+      "port_b": "GigabitEthernet0/0/0/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "wan-core-01",
+      "port_a": "GigabitEthernet0/0/0/2",
+      "device_b": "wan-core-02",
+      "port_b": "GigabitEthernet0/0/0/2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "svc-core-01",
+      "port_a": "GigabitEthernet0/0/0/0",
+      "device_b": "svc-core-02",
+      "port_b": "GigabitEthernet0/0/0/0",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "wan-core-01",
+      "port_a": "GigabitEthernet0/0/0/3",
+      "device_b": "svc-core-01",
+      "port_b": "GigabitEthernet0/0/0/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "wan-core-02",
+      "port_a": "GigabitEthernet0/0/0/3",
+      "device_b": "svc-core-02",
+      "port_b": "GigabitEthernet0/0/0/1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "svc-core-01",
+      "port_a": "GigabitEthernet0/0/0/2",
+      "device_b": "cam-core-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "svc-core-01",
+      "port_a": "GigabitEthernet0/0/0/3",
+      "device_b": "cam-core-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "svc-core-02",
+      "port_a": "GigabitEthernet0/0/0/2",
+      "device_b": "cam-core-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "svc-core-02",
+      "port_a": "GigabitEthernet0/0/0/3",
+      "device_b": "cam-core-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "wan-core-01",
+      "port_a": "GigabitEthernet0/0/0/4",
+      "device_b": "branch-rtr-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "wan-core-02",
+      "port_a": "GigabitEthernet0/0/0/4",
+      "device_b": "branch-rtr-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-core-02",
+      "port_b": "GigabitEthernet3",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b1-dist-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-02",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b1-dist-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-01",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-b1-acc-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-01",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b1-acc-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-01",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b1-acc-03",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-01",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b1-acc-04",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b1-dist-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-02",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b1-dist-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-02",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-b1-acc-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-02",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b1-acc-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-02",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b1-acc-03",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b1-dist-02",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b1-acc-04",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b2-dist-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-02",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b2-dist-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-01",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-b2-acc-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-01",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b2-acc-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-01",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b2-acc-03",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-01",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b2-acc-04",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet7",
+      "device_b": "cam-b2-dist-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-02",
+      "port_a": "GigabitEthernet7",
+      "device_b": "cam-b2-dist-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-02",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-b2-acc-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-02",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b2-acc-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-02",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b2-acc-03",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b2-dist-02",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b2-acc-04",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet8",
+      "device_b": "cam-b3-dist-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-02",
+      "port_a": "GigabitEthernet8",
+      "device_b": "cam-b3-dist-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-01",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-b3-acc-01",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-01",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b3-acc-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-01",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b3-acc-03",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-01",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b3-acc-04",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-01",
+      "port_a": "GigabitEthernet9",
+      "device_b": "cam-b3-dist-02",
+      "port_b": "GigabitEthernet1",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-core-02",
+      "port_a": "GigabitEthernet9",
+      "device_b": "cam-b3-dist-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-02",
+      "port_a": "GigabitEthernet3",
+      "device_b": "cam-b3-acc-01",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-02",
+      "port_a": "GigabitEthernet4",
+      "device_b": "cam-b3-acc-02",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-02",
+      "port_a": "GigabitEthernet5",
+      "device_b": "cam-b3-acc-03",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    },
+    {
+      "device_a": "cam-b3-dist-02",
+      "port_a": "GigabitEthernet6",
+      "device_b": "cam-b3-acc-04",
+      "port_b": "GigabitEthernet2",
+      "edge_type": "physical",
+      "source": "lldp"
+    }
+  ]
+}

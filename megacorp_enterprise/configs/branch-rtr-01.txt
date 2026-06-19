@@ -1,0 +1,85 @@
+hostname branch-rtr-01
+interface Loopback0
+ ip address 10.255.7.1 255.255.255.255
+interface GigabitEthernet1
+ description to-wan-core-01
+ ip address 10.0.0.186 255.255.255.252
+ bfd interval 300 min_rx 300 multiplier 3
+ no shutdown
+ ip nat outside
+interface GigabitEthernet0/2
+ description branch-LAN
+ ip address 10.50.1.1 255.255.255.0
+ ip nat inside
+ no shutdown
+ip access-list extended NAT-ACL
+ permit ip 10.50.1.0 0.0.0.255 any
+ip nat inside source list NAT-ACL interface GigabitEthernet1 overload
+ip sla 1
+ icmp-echo 8.8.8.8
+ frequency 5
+ip sla schedule 1 life forever start-time now
+track 1 ip sla 1 reachability
+ip route 0.0.0.0 0.0.0.0 10.0.0.185 track 1
+interface Tunnel0
+ ip address 10.255.250.1 255.255.255.0
+ tunnel source Loopback0
+ tunnel destination 10.255.4.1
+ tunnel mode gre ip
+class-map match-any VOICE
+ match dscp ef
+class-map match-any CRITICAL
+ match dscp af31
+policy-map WAN-OUT
+ class VOICE
+  priority percent 30
+ class CRITICAL
+  bandwidth percent 20
+ class class-default
+  fair-queue
+interface GigabitEthernet1
+ service-policy output WAN-OUT
+ip prefix-list RFC1918 seq 5 permit 10.0.0.0/8 le 32
+ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+ip community-list standard CORP permit 65000:100
+route-map FROM-PEER permit 10
+ match ip address prefix-list RFC1918
+ set community 65000:100
+route-map TO-PEER permit 10
+ match ip address prefix-list RFC1918
+router bgp 65501
+ bgp router-id 10.255.7.1
+ neighbor 10.0.0.185 remote-as 65300
+ neighbor 10.0.0.185 description peer-AS65300
+ neighbor 10.0.0.185 route-map FROM-PEER in
+ neighbor 10.0.0.185 route-map TO-PEER out
+ neighbor 10.0.0.185 fall-over bfd
+ address-family ipv4
+  network 10.50.1.0 mask 255.255.255.0
+aaa new-model
+tacacs server TAC1
+ address ipv4 10.0.250.10
+aaa group server tacacs+ TAC-GRP
+ server name TAC1
+aaa authentication login default group TAC-GRP local
+aaa authorization exec default group TAC-GRP local
+ip domain-name corp.megacorp.net
+ip name-server 10.0.250.5
+logging host 10.0.250.20
+ip access-list standard MGMT-IN
+ permit 10.0.250.0 0.0.0.255
+ntp server 10.255.255.1
+snmp-server community megacorp RO
+banner login ^MegaCorp branch branch-rtr-01 - authorized access only^
+interface Loopback1
+ ip address 10.255.7.5 255.255.255.255
+interface GigabitEthernet1
+ mpls ip
+mpls ldp router-id Loopback0 force
+mpls label range 16000 23999
+mpls ldp graceful-restart
+mpls ldp session protection
+line vty 0 4
+ access-class MGMT-IN in
+ login authentication default
+ transport input ssh
