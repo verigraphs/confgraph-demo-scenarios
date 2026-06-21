@@ -67,6 +67,10 @@ ip prefix-list RFC1918 seq 5 permit 10.0.0.0/8 le 32
 ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
 ip community-list standard CORP permit 65000:100
 ip as-path access-list 50 permit 65501.*65501
+ip prefix-list BRANCH-DROP seq 5 permit 10.50.5.0/24
+ip prefix-list BRANCH-DROP seq 10 permit 10.50.6.0/24
+route-map FROM-PEER deny 3
+ match ip address prefix-list BRANCH-DROP
 route-map FROM-PEER deny 5
  match as-path 50
 route-map FROM-PEER permit 10

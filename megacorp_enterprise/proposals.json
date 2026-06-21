@@ -12,7 +12,7 @@
     "snippet": "router bgp 65100\n neighbor 10.0.0.6 remote-as 65002"
   },
   "branch-rtr-01": {
-    "narrative": "Prepend the AS-path on the branch's advertised LAN (a routine traffic-steering edit). Two ASes away, across the WAN transit, a campus-core inbound filter keys on the over-prepended path and drops 10.50.1.0/24 outright — so the campus loses reachability to the branch LAN. A policy change at the source cascades into a router whose own config never changed; you cannot read cam-core in isolation.",
+    "narrative": "Prepend the AS-path on the branch's advertised LANs (a routine traffic-steering edit). It lengthens the path for all four branch segments network-wide; two ASes away, across the WAN transit, the campus cores import only some of them and their inbound filter keys on the over-prepended path — so the campus loses reachability to the branch routes it carries while the rest of the fabric just re-routes. A policy change at the source cascades into routers whose own config never changed; you cannot read cam-core in isolation.",
     "snippet": "route-map TO-PEER permit 10\n match ip address prefix-list RFC1918\n set as-path prepend 65501 65501"
   },
   "dc-bleaf-01": {
