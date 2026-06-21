@@ -1,9 +1,10 @@
-! Proposal: ToR Fabric Uplink Maintenance — dc-leaf-01
-! Device: dc-leaf-01
-! Drain dc-leaf-01 for a line-card replacement by shutting both eBGP fabric
-! uplinks (to dc-spine-01 and dc-spine-02). In a dual-spine Clos a single
-! uplink loss is survivable; taking both islands the rack — the server subnet
-! 10.10.1.0/24 loses all fabric reachability until the maintenance completes.
-router bgp 65001
- neighbor 10.0.0.1 shutdown
- neighbor 10.0.0.5 shutdown
+! Proposal: Branch LAN AS-path prepend — a policy cascade across the WAN
+! Device: branch-rtr-01
+! Prepend the AS-path on the branch's advertised LAN (a routine traffic-steering
+! edit). Two ASes away, across the WAN transit, a campus-core inbound filter keys
+! on the over-prepended path and drops 10.50.1.0/24 outright — so the campus loses
+! reachability to the branch LAN. A policy change at the source cascades into a
+! router whose own config never changed; you cannot read cam-core in isolation.
+route-map TO-PEER permit 10
+ match ip address prefix-list RFC1918
+ set as-path prepend 65501 65501
